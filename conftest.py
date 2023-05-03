@@ -7,10 +7,13 @@ from selenium.webdriver.firefox.options import Options
 def pytest_addoption(parser):
     parser.addoption('--browser_name', action='store', default="chrome",
                      help="Choose browser: chrome or firefox")
-    parser.addoption('--language', action='store', default="en",
+    parser.addoption('--language', action='store', default="ru",
                      help="Choose language: es")
 
 
+@pytest.mark.parametrize('link', ["okay_link",
+                                  pytest.param("bugged_link", marks=pytest.mark.xfail),
+                                  "okay_link"])
 @pytest.fixture(scope="function")
 def browser(request):
     browser_name = request.config.getoption("browser_name")
@@ -26,9 +29,11 @@ def browser(request):
     if browser_name == "chrome":
         print("\nstart chrome browser for test..")
         browser = webdriver.Chrome(options=options)
+        browser.maximize_window()
     elif browser_name == "firefox":
         print("\nstart firefox browser for test..")
         browser = webdriver.Firefox(options=options_firefox)
+
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")
     yield browser

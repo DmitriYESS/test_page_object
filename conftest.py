@@ -10,10 +10,6 @@ def pytest_addoption(parser):
     parser.addoption('--language', action='store', default="ru",
                      help="Choose language: es")
 
-
-@pytest.mark.parametrize('link', ["okay_link",
-                                  pytest.param("bugged_link", marks=pytest.mark.xfail),
-                                  "okay_link"])
 @pytest.fixture(scope="function")
 def browser(request):
     browser_name = request.config.getoption("browser_name")

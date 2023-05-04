@@ -1,8 +1,9 @@
 from selenium.webdriver.common.by import By
 
 
-class MainPageLocators:
+class BasePageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
 
 
 class LoginPageLocators:
@@ -21,3 +22,4 @@ class ProductPageLocators:
     BOOK_PRISE_IN_LINE = (By.CSS_SELECTOR, ".alertinner p strong")
     HOW_MANY_BOOKS = (By.CSS_SELECTOR, "#id_form-0-quantity, value")
     BOOKS_SUM_PRISE_IN_BASKET = (By.CSS_SELECTOR, ".col-sm-2 p.price_color.align-right")
+    SUCCESS_MESSAGE = (By.CSS_SELECTOR, ".alert-success")

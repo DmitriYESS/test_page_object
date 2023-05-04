@@ -15,15 +15,23 @@ class ProductPage(BasePage):
         name_in_line = self.browser.find_element(*ProductPageLocators.NAME_OF_BOOK_IN_LINE).text
         price = self.browser.find_element(*ProductPageLocators.BOOK_PRISE).text
         price_in_line = self.browser.find_element(*ProductPageLocators.BOOK_PRISE_IN_LINE).text
-        #basket_button = self.browser.find_element(*ProductPageLocators.BASKET_LINK)
-        #assert basket_button, "Add button is not presented"
-        #basket_button.click()
-        #name_in_basket = self.browser.find_element(*ProductPageLocators.NAME_OF_BOOK_IN_BASKET).text
-        #price_in_basket = self.browser.find_element(*ProductPageLocators.BOOK_PRISE_IN_BASKET).text
-        #sum_in_basket = self.browser.find_element(*ProductPageLocators.BOOKS_SUM_PRISE_IN_BASKET).text
         self.name_in_busket_should_be_name(name, name_in_line)
         self.price_in_busket_should_be_price(price, price_in_line)
-        #self.sum_in_busket_should_be_sum(price, sum_in_basket)
+
+    def test_guest_cant_see_success_message_after_adding_product_to_basket(self):
+        add_button = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON)
+        assert add_button, "Add button is not presented"
+        add_button.click()
+        self.should_not_be_success_message()
+
+    def test_guest_cant_see_success_message(self):
+        self.should_not_be_success_message()
+
+    def test_message_disappeared_after_adding_product_to_basket(self):
+        add_button = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON)
+        assert add_button, "Add button is not presented"
+        add_button.click()
+        self.success_message_is_disappeared()
 
     def name_in_busket_should_be_name(self, name, name_in_line):
         try:
@@ -45,3 +53,11 @@ class ProductPage(BasePage):
             print(f"correct sum {sum}")
         except InvalidSelectorException:
             print('SUM?')
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def success_message_is_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is not disappeared"

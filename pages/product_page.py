@@ -61,3 +61,7 @@ class ProductPage(BasePage):
     def success_message_is_disappeared(self):
         assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
             "Success message is not disappeared"
+
+    def go_to_basket_page_from_product_page(self):
+        btn_view_basket = self.browser.find_element(*ProductPageLocators.BUTTON_VIEW_BASKET)
+        btn_view_basket.click()

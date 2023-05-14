@@ -30,3 +30,8 @@ class ProductPageLocators:
     HOW_MANY_BOOKS = (By.CSS_SELECTOR, "#id_form-0-quantity, value")
     BOOKS_SUM_PRISE_IN_BASKET = (By.CSS_SELECTOR, ".col-sm-2 p.price_color.align-right")
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, ".alert-success")
+    BUTTON_VIEW_BASKET = (By.CSS_SELECTOR, ".basket-mini a")
+
+class BasketPageLocators():
+    BASKET_FORMS_WITH_PRODUCTS = (By.CSS_SELECTOR, "#basket_formset")
+    MESSAGE_BASKET_EMPTY = (By.CSS_SELECTOR, "#content_inner>p")

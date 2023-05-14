@@ -9,7 +9,7 @@ class ProductPage(BasePage):
         add_button = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON)
         assert add_button, "Add button is not presented"
         add_button.click()
-        self.solve_quiz_and_get_code()
+        #self.solve_quiz_and_get_code()
         self.browser.implicitly_wait(5)
         name = self.browser.find_element(*ProductPageLocators.NAME_OF_BOOK).text
         name_in_line = self.browser.find_element(*ProductPageLocators.NAME_OF_BOOK_IN_LINE).text
